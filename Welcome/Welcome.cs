@@ -1,4 +1,4 @@
-﻿using Exiled.API.Enums;
+using Exiled.API.Enums;
 using Exiled.API.Features;
 using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
@@ -22,7 +22,7 @@ namespace Welcome
 
         public override string Prefix { get; } = "Welcome";
 
-        public override Version Version { get; } = new Version(1, 0, 2);
+        public override Version Version { get; } = new Version(1, 0, 3);
 
         public override Version RequiredExiledVersion { get; } = new Version(5, 2, 1);
         private Welcome()
@@ -48,7 +48,7 @@ namespace Welcome
             Server.RoundStarted += server.OnRoundSterted;
             Server.RoundEnded += server.OnRoundEnded;
             Server.RespawningTeam += server.OnRespawningTeam;
-            
+            ///Server.ReloadedConfigs += server.OnReloadedConfigs;
 
             Player.Left += player.OnLeft;
             Player.Joined += player.OnJoin;
@@ -56,7 +56,9 @@ namespace Welcome
             Player.Banned += player.OnBanned;
             Player.Kicked += player.OnKicked;
             Player.TriggeringTesla += player.OnTriggeringTesla;
+            Player.InteractingDoor += player.OnInteractingDoor;
             
+
         }
 
         public void UnRegisterEvents()
@@ -65,6 +67,7 @@ namespace Welcome
             Server.RoundStarted -= server.OnRoundSterted;
             Server.RoundEnded -= server.OnRoundEnded;
             Server.RespawningTeam -= server.OnRespawningTeam;
+            ///Server.ReloadedConfigs += server.OnReloadedConfigs;
 
             Player.Left -= player.OnLeft;
             Player.Joined -= player.OnJoin;
@@ -72,6 +75,7 @@ namespace Welcome
             Player.Banned -= player.OnBanned;
             Player.Kicked -= player.OnKicked;
             Player.TriggeringTesla -= player.OnTriggeringTesla;
+            Player.InteractingDoor -= player.OnInteractingDoor;
 
             player = null;
             server = null;
