@@ -29,5 +29,14 @@ namespace Welcome
         public string OnBanned { get; set; } = "{player} has been banned from this server";
 
         public string OnKicked { get; set; } = "{player} has been kicked from this server on {reason}";
+    
+        public bool OnMtfTrigersTesla { get; set; } = true;
+
+        public bool OnEscapeItem { get; set; } = true;
+
+        public bool Scp682OnEnable { get; set; } = false;
+
+        public string OnDestroyDoor { get; set; } = "your eat near doors to the map";
+
     }
 }
