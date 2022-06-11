@@ -22,7 +22,7 @@ namespace Welcome
 
         public override string Prefix { get; } = "Welcome";
 
-        public override Version Version { get; } = new Version(1, 0, 1);
+        public override Version Version { get; } = new Version(1, 0, 2);
 
         public override Version RequiredExiledVersion { get; } = new Version(5, 2, 1);
         private Welcome()
@@ -55,7 +55,7 @@ namespace Welcome
             Player.ChangingRole += player.OnChangingRole;
             Player.Banned += player.OnBanned;
             Player.Kicked += player.OnKicked;
-            
+            Player.TriggeringTesla += player.OnTriggeringTesla;
             
         }
 
@@ -71,9 +71,11 @@ namespace Welcome
             Player.ChangingRole -= player.OnChangingRole;
             Player.Banned -= player.OnBanned;
             Player.Kicked -= player.OnKicked;
+            Player.TriggeringTesla -= player.OnTriggeringTesla;
 
             player = null;
             server = null;
+            world =null;
         }
     }
 }
