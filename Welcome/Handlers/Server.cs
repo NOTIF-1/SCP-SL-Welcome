@@ -1,6 +1,7 @@
 using System;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
+using Exiled.API.Interfaces;
 
 namespace Welcome.Handlers
 {
