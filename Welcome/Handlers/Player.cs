@@ -37,5 +37,17 @@ namespace Welcome.Handlers
             Okp.Replace("{reason}", reason);
             Log.Warn(Okp);
         }
+        public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
+        {
+            string player = ev.Player.Role.ToString();
+            if (player == "MTF")
+            {
+                ev.IsTriggerable = false;
+            }
+            else
+            {
+                ev.IsTriggerable = true;
+            }
+        }
     }
 }
