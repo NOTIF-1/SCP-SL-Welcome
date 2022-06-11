@@ -1,7 +1,11 @@
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
+using Exiled.CustomRoles.API.Features;
+using Exiled.API.Enums;
 using Exiled.API.Extensions;
 using Exiled.Events.Handlers;
+using PlayerStatsSystem;
+using UnityEngine;
 using System;
 
 namespace Welcome.Handlers
@@ -18,10 +22,19 @@ namespace Welcome.Handlers
         }
         public void OnChangingRole(ChangingRoleEventArgs ev)
         {
-            string role = ev.NewRole.ToString();
-            string Ocr1 = Welcome.Instance.Config.OnChangingRole.Replace("{player}", ev.Player.Nickname);
-            Log.Warn(Ocr1);
-            Log.Warn(role);
+            string roles = ev.NewRole.ToString();
+            string news = Welcome.Instance.Config.OnRespawningTeam.Replace("{team}", ev.NewRole.ToString());
+            bool ifds = Welcome.Instance.Config.OnEscapeItem;
+            Log.Info(news);
+            if (ifds = true)
+                if (roles == "NtfSpecialist")
+                {
+                    ev.Player.AddItem(ItemType.MicroHID);
+                }
+            else
+            {
+                Log.Info("[Settings] EscapeItem turn off");
+            }
         }
         public void OnBanned(BannedEventArgs ev)
         {
@@ -39,14 +52,49 @@ namespace Welcome.Handlers
         }
         public void OnTriggeringTesla(TriggeringTeslaEventArgs ev)
         {
-            string player = ev.Player.Role.ToString();
-            if (player == "MTF")
+            string player = ev.Player.Role.Team.ToString();
+            bool arg1 = Welcome.Instance.Config.OnMtfTrigersTesla;
+            if (arg1 == true)
             {
-                ev.IsTriggerable = false;
+                if (player == "MTF")
+                {
+                    ev.IsTriggerable = false;
+                }
+
+                else
+                {
+                    ev.IsTriggerable = true;
+                }
             }
             else
             {
-                ev.IsTriggerable = true;
+                Log.Info("[Setting] Tesla not trigers MTF units");
+            }
+        }
+        public void OnInteractingDoor(InteractingDoorEventArgs ev)
+        {
+            string prole = ev.Player.Role.ToString();
+            bool enbalews = Welcome.Instance.Config.Scp682OnEnable;
+            if (enbalews = true)
+            {
+                if (prole == "Scp93953")
+                {
+                    string mes = Welcome.Instance.Config.OnDestroyDoor;
+                    ev.Door.BreakDoor();
+                    ev.Player.SendConsoleMessage(mes, "red");
+                    ev.Player.Heal(100, true);
+                }
+                if (prole == "Scp93989")
+                {
+                    string mes = Welcome.Instance.Config.OnDestroyDoor;
+                    ev.Door.BreakDoor();
+                    ev.Player.SendConsoleMessage(mes, "red");
+                    ev.Player.Heal(100, true);
+                }
+            }
+            else
+            {
+                Log.Info("[Settings] Scp682 disabled sorry");
             }
         }
     }
