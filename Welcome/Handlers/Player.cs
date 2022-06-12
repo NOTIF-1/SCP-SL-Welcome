@@ -75,26 +75,34 @@ namespace Welcome.Handlers
         {
             string prole = ev.Player.Role.ToString();
             bool enbalews = Welcome.Instance.Config.Scp682OnEnable;
-            if (enbalews = true)
+            if (ev.Door.IsBroken)
             {
-                if (prole == "Scp93953")
-                {
-                    string mes = Welcome.Instance.Config.OnDestroyDoor;
-                    ev.Door.BreakDoor();
-                    ev.Player.SendConsoleMessage(mes, "red");
-                    ev.Player.Heal(100, true);
-                }
-                if (prole == "Scp93989")
-                {
-                    string mes = Welcome.Instance.Config.OnDestroyDoor;
-                    ev.Door.BreakDoor();
-                    ev.Player.SendConsoleMessage(mes, "red");
-                    ev.Player.Heal(100, true);
-                }
+                ev.Player.SendConsoleMessage("Door not heal as broken sorry", "red");
             }
             else
             {
-                Log.Info("[Settings] Scp682 disabled sorry");
+                if (enbalews = true)
+                {
+                    if (prole == "Scp93953")
+                    {
+                        string mes = Welcome.Instance.Config.OnDestroyDoor;
+                        ev.Door.BreakDoor();
+                        ev.Player.SendConsoleMessage(mes, "red");
+                        int amount = Welcome.Instance.Config.AmountDoorHeal;
+                        ev.Player.Heal(amount, true);
+                    }
+                    if (prole == "Scp93989")
+                    {
+                        string mes = Welcome.Instance.Config.OnDestroyDoor;
+                        ev.Door.BreakDoor();
+                        ev.Player.SendConsoleMessage(mes, "red");
+                        ev.Player.Heal(100, true);
+                    }
+                }
+                else
+                {
+                    Log.Info("[Settings] Scp682 disabled sorry");
+                }
             }
         }
     }
