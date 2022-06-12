@@ -38,5 +38,12 @@ namespace Welcome.Handlers
                 Log.Warn(em);
             }
         }
+        public void OnReportingCheater(ReportingCheaterEventArgs ev)
+        {
+            string link = Welcome.Instance.Config.DiscordServerLink;
+            string mes = Welcome.Instance.Config.ReportMessage.Replace("{discord}", link);
+            ev.Issuer.SendConsoleMessage(mes, "yellow");
+            ev.Target.SendConsoleMessage("your have been reported", "red");
+        }
     }
 }
