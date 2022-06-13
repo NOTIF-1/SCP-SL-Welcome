@@ -22,7 +22,7 @@ namespace Welcome
 
         public override string Prefix { get; } = "Welcome";
 
-        public override Version Version { get; } = new Version(1, 0, 5);
+        public override Version Version => new Version(1, 0, 6);
 
         public override Version RequiredExiledVersion { get; } = new Version(5, 2, 1);
         private Welcome()
@@ -48,7 +48,7 @@ namespace Welcome
             Server.RoundStarted += server.OnRoundSterted;
             Server.RoundEnded += server.OnRoundEnded;
             Server.RespawningTeam += server.OnRespawningTeam;
-            Server.ReportingCheater += server.OnReportingCheater;
+            Server.ReloadedConfigs += server.OnReloadedConfigs;
 
             Player.Left += player.OnLeft;
             Player.Joined += player.OnJoin;
@@ -67,8 +67,7 @@ namespace Welcome
             Server.RoundStarted -= server.OnRoundSterted;
             Server.RoundEnded -= server.OnRoundEnded;
             Server.RespawningTeam -= server.OnRespawningTeam;
-            Server.ReportingCheater -= server.OnReportingCheater;
-            ///Server.ReloadedConfigs += server.OnReloadedConfigs;
+            Server.ReloadedConfigs += server.OnReloadedConfigs;
 
             Player.Left -= player.OnLeft;
             Player.Joined -= player.OnJoin;
