@@ -38,12 +38,9 @@ namespace Welcome.Handlers
                 Log.Warn(em);
             }
         }
-        public void OnReportingCheater(ReportingCheaterEventArgs ev)
+        public void OnReloadedConfigs()
         {
-            string link = Welcome.Instance.Config.DiscordServerLink;
-            string mes = Welcome.Instance.Config.ReportMessage.Replace("{discord}", link);
-            ev.Issuer.SendConsoleMessage(mes, "yellow");
-            ev.Target.SendConsoleMessage("your have been reported", "red");
+            bool enbalews = Welcome.Instance.Config.Scp682OnEnable;
         }
     }
 }
