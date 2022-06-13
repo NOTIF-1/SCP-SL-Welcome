@@ -26,7 +26,7 @@ namespace Welcome.Handlers
             string news = Welcome.Instance.Config.OnRespawningTeam.Replace("{team}", ev.NewRole.ToString());
             bool ifds = Welcome.Instance.Config.OnEscapeItem;
             Log.Info(news);
-            if (ifds = true)
+            if (ifds == true)
                 if (roles == "NtfSpecialist")
                 {
                     ev.Player.AddItem(ItemType.MicroHID);
@@ -73,35 +73,42 @@ namespace Welcome.Handlers
         }
         public void OnInteractingDoor(InteractingDoorEventArgs ev)
         {
+            
             string prole = ev.Player.Role.ToString();
             bool enbalews = Welcome.Instance.Config.Scp682OnEnable;
-            if (ev.Door.IsBroken)
+            //Log.Info($"[debugs] plugins was {enbalews.ToString()}");
+            if (ev.Door.IsBreakable)
             {
-                ev.Player.SendConsoleMessage("Door not heal as broken sorry", "red");
-            }
-            else
-            {
-                if (enbalews = true)
+                if (ev.Door.IsBroken)
                 {
-                    if (prole == "Scp93953")
-                    {
-                        string mes = Welcome.Instance.Config.OnDestroyDoor;
-                        ev.Door.BreakDoor();
-                        ev.Player.SendConsoleMessage(mes, "red");
-                        int amount = Welcome.Instance.Config.AmountDoorHeal;
-                        ev.Player.Heal(amount, true);
-                    }
-                    if (prole == "Scp93989")
-                    {
-                        string mes = Welcome.Instance.Config.OnDestroyDoor;
-                        ev.Door.BreakDoor();
-                        ev.Player.SendConsoleMessage(mes, "red");
-                        ev.Player.Heal(100, true);
-                    }
+                    ev.Player.SendConsoleMessage("Door not heal as broken sorry", "red");
                 }
                 else
                 {
-                    Log.Info("[Settings] Scp682 disabled sorry");
+                    if (enbalews == true)
+                    {
+                        if (prole == "Scp93953")
+                        {
+                            string mes = Welcome.Instance.Config.OnDestroyDoor;
+                            ev.Door.BreakDoor();
+                            ev.Player.SendConsoleMessage(mes, "red");
+                            int amount = Welcome.Instance.Config.AmountDoorHeal;
+                            ev.Player.Heal(amount, true);
+                        }
+                        if (prole == "Scp93989")
+                        {
+                            string mes = Welcome.Instance.Config.OnDestroyDoor;
+                            ev.Door.BreakDoor();
+                            ev.Player.SendConsoleMessage(mes, "red");
+                            int amount = Welcome.Instance.Config.AmountDoorHeal;
+                            ev.Player.Heal(amount, true);
+                        }
+                    }
+                
+                    else
+                    {
+                        Log.Info("[Settings] Scp682 disabled sorry");
+                    }
                 }
             }
         }
