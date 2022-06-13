@@ -36,6 +36,8 @@ namespace Welcome
 
         public bool Scp682OnEnable { get; set; } = false;
 
+        public int AmountDoorHeal { get; set; } = 100;
+
         public string OnDestroyDoor { get; set; } = "your eat near doors to the map";
 
     }
